@@ -24,8 +24,12 @@ public interface EmployeeMapper {
             "values(#{name},#{username},#{password},#{phone},#{sex},#{idNumber},#{status},#{createTime},#{updateTime},#{createUser},#{updateUser})")
     void addEmp(Employee employee);
 
+    //分页查询员工
     Page<Employee> searchPage(EmployeePageQueryDTO employeePageQueryDTO);
 
-    //分页查询员工
+    //启用禁用账户
+    void startOrStop(Employee employee);
+
+
 
 }

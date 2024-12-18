@@ -21,4 +21,7 @@ public interface EmployeeService {
 
     //分页查询员工
     PageResult SearchPage(EmployeePageQueryDTO employeePageQueryDTO);
+
+    //启用或者禁用账号
+    void startOrStop(Long id, Integer status);
 }

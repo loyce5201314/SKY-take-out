@@ -78,15 +78,18 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setStatus(StatusConstant.ENABLE);
         employee.setCreateTime(LocalDateTime.now());
         employee.setUpdateTime(LocalDateTime.now());
+        //创建人的id
         employee.setCreateUser(BaseContext.getCurrentId());
+        //修改人的id
         employee.setUpdateUser(BaseContext.getCurrentId());
         employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
 
         employeeMapper.addEmp(employee);
-        return;
+
 
     }
 
+    //分页查询员工
     @Override
     public PageResult SearchPage(EmployeePageQueryDTO employeePageQueryDTO) {
         //开始分页查询
@@ -95,6 +98,17 @@ public class EmployeeServiceImpl implements EmployeeService {
         long total = employeePage.getTotal();
         List<Employee> result = employeePage.getResult();
         return new PageResult(total,result);
+    }
+
+    //启动禁用账号 以及修改员工信息
+    @Override
+    public void startOrStop(Long id, Integer status) {
+        Employee  employee = new Employee();
+        employee.setId(id);
+        employee.setStatus(status);
+
+        employeeMapper.startOrStop(employee);
+
     }
 
 }
