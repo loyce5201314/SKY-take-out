@@ -1,11 +1,15 @@
 package com.sky.mapper;
 
 import com.github.pagehelper.Page;
+import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeePageQueryDTO;
 import com.sky.entity.Employee;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+
+import java.time.LocalDateTime;
 
 @Mapper
 public interface EmployeeMapper {
@@ -29,6 +33,13 @@ public interface EmployeeMapper {
 
     //启用禁用账户
     void startOrStop(Employee employee);
+
+    @Select("select * from sky_take_out.employee where id = #{id}")
+    Employee getByid(Long id);
+
+    //修改员工信息
+    @Update("update employee set name = #{name},username = #{username},phone = #{phone},sex = #{sex},id_number = #{idNumber},update_time = #{updateTime},update_user = #{updateUser} where id = #{id}")
+    void update(Employee employee);
 
 
 
